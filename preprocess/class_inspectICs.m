@@ -95,11 +95,7 @@ classdef class_inspectICs < handle
         % defining a constructor
         function obj = class_inspectICs(varargin)
             % add path to dependencies
-            if ispc == 1
-                sep = '\';
-            elseif isunix == 1
-                sep = '/';
-            end
+            sep = filesep;
             addpath(['..',sep,'dependencies']);
             % make sure to addpath to eeglab as well
             
@@ -138,7 +134,10 @@ classdef class_inspectICs < handle
             %   before that, change the chanlocs from digitized one since
             %   the captrak digitizer gives a weird 90 rotation
             obj.preEEG.digitized_chanlocs = obj.preEEG.chanlocs;
-            obj.preEEG.chanlocs = obj.preEEG.EEGraw.chanlocs;
+            try
+                obj.preEEG.chanlocs = obj.preEEG.EEGraw.chanlocs;
+            catch e
+            end
             % load default configs from SASICA plugin
             cfg = SASICA('getdefs');
             % modify a few parameters
