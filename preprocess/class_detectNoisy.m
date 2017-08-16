@@ -5,7 +5,7 @@ classdef class_detectNoisy
     %       class_detectNoisy('data',dataMat,'threshold_amp',10000,...
     %                         'threshold_samp',40,'which_channel',1);
     %       process(noisy_obj);
-    %       visualize(noisy_obj);
+    %       show(noisy_obj);
     %
     %   Arguments:
     %       'data': data matrix (channel x time samples)
@@ -68,7 +68,7 @@ classdef class_detectNoisy
             % ===========================================
             
             % pre-allocate the results matrix
-            obj.results = zeros(size(data));
+            obj.results = zeros(size(obj.data));
         end
     end
     
@@ -144,7 +144,7 @@ classdef class_detectNoisy
             end
         end
         
-        function visualize(obj)
+        function show(obj)
             figure;
             % original data
             plot(obj.data(obj.which_channel,:));
